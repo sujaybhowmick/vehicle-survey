@@ -1,8 +1,6 @@
 package com.aconex.survey;
 
 import org.junit.Test;
-
-import java.sql.Timestamp;
 import java.time.LocalTime;
 
 import static org.junit.Assert.*;
@@ -42,9 +40,9 @@ public class TimeUtilsTest {
         assertEquals(28, seconds);
 
         String strTime = TimeUtils.toStringTime(hours, minutes, seconds);
-        assertEquals("12:04:28", strTime);
+        assertEquals("00:04:28", strTime);
 
-        LocalTime localTime = TimeUtils.toTime(hours, minutes, seconds);
+        LocalTime localTime = TimeUtils.toTime(0, 4, 28);
         LocalTime expected = LocalTime.of((int)hours, (int)minutes, (int)seconds);
         assertEquals(expected, localTime);
 
