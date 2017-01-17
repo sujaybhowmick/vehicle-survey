@@ -26,8 +26,8 @@ public class SensorTest {
     @Test
     public void testAddSensorEntry(){
         PneumaticSensor sensorA = new PneumaticSensor("A");
-        sensorA.addEntry(new SensorEntry(268981, 1));
-        Set<SensorEntry> entries = sensor.fetchEntries();
+        sensorA.addEntry(new SensorEntry(1, 268981));
+        Set<SensorEntry> entries = sensorA.getEntries();
         assertEquals(1, entries.size());
     }
 }
