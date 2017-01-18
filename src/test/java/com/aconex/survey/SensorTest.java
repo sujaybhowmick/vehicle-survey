@@ -4,7 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +30,13 @@ public class SensorTest {
     public void testAddSensorEntry(){
         PneumaticSensor sensorA = new PneumaticSensor("A");
         sensorA.addEntry(new SensorEntry(1, 268981));
+        sensorA.addEntry(new SensorEntry(1, 269123));
         Set<SensorEntry> entries = sensorA.getEntries();
-        assertEquals(1, entries.size());
+        assertEquals(2, entries.size());
+        LocalTime localTime = TimeUtils.toTime(268981);
+        long count = entries.stream().filter(item -> item.getTime().equals(localTime)).count();
+        assertEquals(1, count);
+        List<SensorEntry> list = entries.stream().filter(item -> item.getTime().equals(localTime)).collect(Collectors.toList());
+        assertEquals(new SensorEntry(1, 268981), list.get(0));
     }
 }
