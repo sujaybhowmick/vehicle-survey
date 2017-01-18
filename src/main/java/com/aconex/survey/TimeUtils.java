@@ -28,4 +28,11 @@ public class TimeUtils {
     public static LocalTime toTime(long hours, long minutes, long seconds) {
         return LocalTime.of((int)hours, (int)minutes, (int)seconds);
     }
+
+    public static LocalTime toTime(long durationInMillis){
+        long hours = toHours(durationInMillis);
+        long minutes = toMinutes(durationInMillis);
+        long seconds = toSeconds(durationInMillis);
+        return toTime(hours, minutes, seconds);
+    }
 }
