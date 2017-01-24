@@ -35,4 +35,12 @@ public class VehicleEntryTest {
     }
 
 
+    @Test
+    public void testSpeedInKmph(){
+        VehicleEntry vehicleEntry = new VehicleEntry(0, 86328771, 86328899, Direction.SOUTH);
+        assertEquals(70.3, vehicleEntry.speedInKmph(), 0.015);
+    }
+
+
+
 }
