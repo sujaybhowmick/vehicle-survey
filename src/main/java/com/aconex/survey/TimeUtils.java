@@ -7,6 +7,16 @@ import java.util.concurrent.TimeUnit;
  * Created by sbhowmick on 1/18/17.
  */
 public class TimeUtils {
+
+    public static final int HOURS_IN_A_DAY = 24;
+    public static final int MINUTES_IN_A_HOUR = 60;
+    public static final int SECONDS_IN_A_MINUTE = 60;
+    public static final int MILLISECONDS_IN_A_SECOND = 1000;
+    public static final int MAX_MILLISECONDS_IN_A_DAY = HOURS_IN_A_DAY * MINUTES_IN_A_HOUR * SECONDS_IN_A_MINUTE * MILLISECONDS_IN_A_SECOND;
+
+
+    private TimeUtils(){}
+
     public static long toHours(long durationInMillis) {
         return TimeUnit.MILLISECONDS.toHours(durationInMillis);
     }
@@ -34,5 +44,14 @@ public class TimeUtils {
         long minutes = toMinutes(durationInMillis);
         long seconds = toSeconds(durationInMillis);
         return toTime(hours, minutes, seconds);
+    }
+
+    public static double convertToHour(int milliseconds){
+        if (milliseconds <0 )
+            return -1;
+        double minutesInHour = MINUTES_IN_A_HOUR;
+        double secondsInMinute = SECONDS_IN_A_MINUTE;
+        double milliSecondsInSecond = MILLISECONDS_IN_A_SECOND;
+        return ((double)milliseconds)/(milliSecondsInSecond * secondsInMinute * minutesInHour);
     }
 }
