@@ -48,4 +48,10 @@ public class TimeUtilsTest {
 
     }
 
+    @Test
+    public void testConvertToHour(){
+        double inHours = TimeUtils.convertToHour(3600000);
+        assertEquals(1.00, inHours, 0.0);
+    }
+
 }
