@@ -6,6 +6,9 @@ package com.aconex.survey;
  */
 public class VehicleEntry {
 
+    public static final double WHEELBASE = 0.0025; // in kms
+    public static final double AVG_SPEED = 16.66; // in m/s
+
     private int day;
 
     private final int frontAxleTime;
@@ -41,6 +44,15 @@ public class VehicleEntry {
         return (frontAxleTime >= 0 && frontAxleTime < TimeUtils.MAX_MILLISECONDS_IN_A_DAY
                 && backAxleTime >= 0 && backAxleTime < TimeUtils.MAX_MILLISECONDS_IN_A_DAY
                 && frontAxleTime < backAxleTime);
+    }
+
+    public double speedInKmph(){
+        if(!isValid()){
+            return 0;
+        }
+
+        double timeTaken = TimeUtils.convertToHour(backAxleTime - frontAxleTime);
+        return WHEELBASE / timeTaken;
     }
 
 }
