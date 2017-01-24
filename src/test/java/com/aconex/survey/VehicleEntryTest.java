@@ -23,10 +23,16 @@ public class VehicleEntryTest {
 
     @Test
     public void testVehicleEntry(){
-        //PneumaticSensor sensorA = new PneumaticSensor("A");
         VehicleEntry vehicleEntry = new VehicleEntry(0, 86328771, 86328899, Direction.SOUTH);
         assertNotNull(vehicleEntry);
-        assertTrue(vehicleEntry.isValid());
 
     }
+
+    @Test
+    public void testIsValid(){
+        VehicleEntry vehicleEntry = new VehicleEntry(0, 86328771, 86328899, Direction.SOUTH);
+        assertTrue(vehicleEntry.isValid());
+    }
+
+
 }
