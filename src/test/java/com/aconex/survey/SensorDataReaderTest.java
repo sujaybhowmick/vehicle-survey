@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 import java.io.StringReader;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by sbhowmick on 1/25/17.
