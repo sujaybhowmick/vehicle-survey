@@ -14,6 +14,7 @@ import java.util.List;
 public class SensorDataReaderTest {
 
     StringBuilder input = new StringBuilder();
+
     @Before
     public void setUp(){
         input.append("A268981").append("\n");
