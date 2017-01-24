@@ -1,6 +1,8 @@
 package com.aconex.survey;
 
 
+import java.util.Date;
+
 /**
  * Created by sbhowmick on 1/24/17.
  */
@@ -17,11 +19,14 @@ public class VehicleEntry {
 
     private final Direction direction;
 
+    private final Date entryTime;
+
     public VehicleEntry(int day, int frontAxleTime, int backAxleTime, Direction direction) {
         this.day = day;
         this.frontAxleTime = frontAxleTime;
         this.backAxleTime = backAxleTime;
         this.direction = direction;
+        this.entryTime = new Date((frontAxleTime + backAxleTime) / 2);
     }
 
     public int getDay() {
@@ -55,4 +60,11 @@ public class VehicleEntry {
         return WHEELBASE / timeTaken;
     }
 
+    public Date getEntryTime() {
+        return entryTime;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
 }
