@@ -54,4 +54,16 @@ public class TimeUtils {
         double milliSecondsInSecond = MILLISECONDS_IN_A_SECOND;
         return ((double)milliseconds)/(milliSecondsInSecond * secondsInMinute * minutesInHour);
     }
+
+    public static int parseMillisFromInput(String input){
+        try {
+            int milliSeconds = Integer.parseInt(input.substring(1));
+            if (milliSeconds < 0 )
+                return -1;
+            return milliSeconds;
+        }catch (NumberFormatException e){
+            System.out.println(String.format("Error parsing time from %s: ", input));
+        }
+        return -1;
+    }
 }
