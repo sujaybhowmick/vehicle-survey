@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class SensorDataParser {
 
-    public static final String INPUT_VALIDATION_REGEX = "^[AaBb][0-9]+$";
     private static final int ENTRIES_FOR_NORTH_DIRECTION = 2;
     private static final int ENTRIES_FOR_SOUTH_DIRECTION = 4;
     private static final int MINIMUM_NUMBER_OF_ENTRIES_NEEDED = 2;
