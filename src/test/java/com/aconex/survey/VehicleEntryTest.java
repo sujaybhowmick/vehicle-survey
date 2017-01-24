@@ -26,6 +26,7 @@ public class VehicleEntryTest {
         //PneumaticSensor sensorA = new PneumaticSensor("A");
         VehicleEntry vehicleEntry = new VehicleEntry(0, 86328771, 86328899, Direction.SOUTH);
         assertNotNull(vehicleEntry);
+        assertTrue(vehicleEntry.isValid());
 
     }
 }
