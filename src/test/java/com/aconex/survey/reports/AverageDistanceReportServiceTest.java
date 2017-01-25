@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class AverageDistanceReportServiceTest extends BaseReportServiceTest {
     @Test
-    public void generate() throws Exception {
+    public void testGenerate() throws Exception {
         List<VehicleEntry> entries = new SensorDataParser().parse(this.inputs);
         int interval = 720;
         List<Session> sessions = Session.createSessions(interval);

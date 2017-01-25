@@ -15,7 +15,7 @@ public class VehicleCountReportServiceTest extends BaseReportServiceTest {
 
 
     @Test
-    public void testVehicleCountMorning(){
+    public void testGenerate(){
         List<VehicleEntry> entries = new SensorDataParser().parse(this.inputs);
         int interval = 720;
         List<Session> sessions = Session.createSessions(interval);
