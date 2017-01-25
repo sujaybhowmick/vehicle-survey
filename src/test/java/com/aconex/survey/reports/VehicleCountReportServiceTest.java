@@ -1,8 +1,5 @@
 package com.aconex.survey.reports;
 
-import com.aconex.survey.SensorDataParser;
-import com.aconex.survey.Session;
-import com.aconex.survey.VehicleEntry;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,12 +13,10 @@ public class VehicleCountReportServiceTest extends BaseReportServiceTest {
 
     @Test
     public void testGenerate(){
-        List<VehicleEntry> entries = new SensorDataParser().parse(this.inputs);
         int interval = 720;
-        List<Session> sessions = Session.createSessions(interval);
         VehicleCountReportService report = new VehicleCountReportService(interval);
-        List<VehicleCountReportService.VehicleCountReportModel> reportModels = report.generate(entries);
-        assertEquals(10, reportModels.size());
+        List<VehicleCountReportService.VehicleCountReportItem> items = report.generate(entries);
+        assertEquals(10, items.size());
 
 
     }

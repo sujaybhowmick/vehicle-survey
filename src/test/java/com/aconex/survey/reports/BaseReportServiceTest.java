@@ -1,5 +1,7 @@
 package com.aconex.survey.reports;
 
+import com.aconex.survey.SensorDataParser;
+import com.aconex.survey.VehicleEntry;
 import org.junit.Before;
 
 import java.util.ArrayList;
@@ -9,21 +11,25 @@ import java.util.List;
  * Created by sbhowmick on 1/25/17.
  */
 public class BaseReportServiceTest {
-    List<String> inputs;
+
+    List<VehicleEntry> entries;
 
     @Before
     public void setUp(){
-        this.inputs = new ArrayList<>();
-        this.inputs.add("A268981");
-        this.inputs.add("A269123");
-        this.inputs.add("A604957");
-        this.inputs.add("B604960");
-        this.inputs.add("A605128");
-        this.inputs.add("B605132");
-        this.inputs.add("A1089807");
-        this.inputs.add("B1089810");
-        this.inputs.add("A1089948");
-        this.inputs.add("B1089951");
+        List<String> inputs = new ArrayList<>();
+        inputs = new ArrayList<>();
+        inputs.add("A268981");
+        inputs.add("A269123");
+        inputs.add("A604957");
+        inputs.add("B604960");
+        inputs.add("A605128");
+        inputs.add("B605132");
+        inputs.add("A1089807");
+        inputs.add("B1089810");
+        inputs.add("A1089948");
+        inputs.add("B1089951");
+
+        entries = new SensorDataParser().parse(inputs);
 
     }
 }

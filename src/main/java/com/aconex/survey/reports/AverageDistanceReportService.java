@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by sbhowmick on 1/25/17.
  */
-public class AverageDistanceReportService extends AbstractSensorReportService<List<AverageDistanceReportService.AverageDistanceReportModel>> {
+public class AverageDistanceReportService extends AbstractSensorReportService<List<AverageDistanceReportService.AverageDistanceReportItem>> {
 
 
     private final int interval;
@@ -22,23 +22,23 @@ public class AverageDistanceReportService extends AbstractSensorReportService<Li
     }
 
     @Override
-    public List<AverageDistanceReportModel> generate(List<VehicleEntry> vehicleEntries) {
+    public List<AverageDistanceReportItem> generate(List<VehicleEntry> vehicleEntries) {
         List<Session> sessions = Session.createSessions(interval);
-        List<AverageDistanceReportModel> averageDistances = new ArrayList<>();
+        List<AverageDistanceReportItem> reportItems = new ArrayList<>();
         if(sessions.isEmpty()) {
             return Collections.emptyList();
         }
 
         for(Session session: sessions){
-            List<VehicleEntry> sessionEntries = filterEntriesForSession(vehicleEntries, session);
-            List<VehicleEntry> southEntries = filterEntriesForDirection(sessionEntries, Direction.SOUTH);
-            List<VehicleEntry> northEntries = filterEntriesForDirection(sessionEntries, Direction.NORTH);
+            List<VehicleEntry> entriesForSession = filterEntriesForSession(vehicleEntries, session);
+            List<VehicleEntry> southEntries = filterEntriesForDirection(entriesForSession, Direction.SOUTH);
+            List<VehicleEntry> northEntries = filterEntriesForDirection(entriesForSession, Direction.NORTH);
             double distanceInSouth = getAverageDistance(southEntries);
             double distanceInNorth = getAverageDistance(northEntries);
-            averageDistances.add(new AverageDistanceReportModel(session, distanceInSouth, distanceInNorth));
+            reportItems.add(new AverageDistanceReportItem(session, distanceInSouth, distanceInNorth, interval));
         }
 
-        return averageDistances;
+        return reportItems;
     }
 
     private double getAverageDistance(List<VehicleEntry> entriesInTheSession) {
@@ -50,18 +50,21 @@ public class AverageDistanceReportService extends AbstractSensorReportService<Li
         return averageTimeGapBetweenVehicles * SensorReportService.AVG_SPEED/ TimeUtils.MILLISECONDS_IN_A_SECOND;
     }
 
-    public class AverageDistanceReportModel {
+    public class AverageDistanceReportItem {
 
-        final Session session;
+        public final Session session;
 
-        final double averageDistanceSouth;
+        public final double averageDistanceSouth;
 
-        final double averageDistanceNorth;
+        public final double averageDistanceNorth;
 
-        public AverageDistanceReportModel(Session session, double averageDistanceSouth, double averageDistanceNorth) {
+        public final int interval;
+
+        public AverageDistanceReportItem(Session session, double averageDistanceSouth, double averageDistanceNorth, int interval) {
             this.session = session;
             this.averageDistanceSouth = averageDistanceSouth;
             this.averageDistanceNorth = averageDistanceNorth;
+            this.interval = interval;
         }
     }
 }
