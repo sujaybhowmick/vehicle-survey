@@ -9,7 +9,6 @@ import java.util.Date;
 public class VehicleEntry {
 
     public static final double WHEELBASE = 0.0025; // in kms
-    public static final double AVG_SPEED = 16.66; // in m/s
 
     private int day;
 
