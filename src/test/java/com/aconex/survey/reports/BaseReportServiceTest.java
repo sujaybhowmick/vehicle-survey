@@ -17,7 +17,6 @@ public class BaseReportServiceTest {
     @Before
     public void setUp(){
         List<String> inputs = new ArrayList<>();
-        inputs = new ArrayList<>();
         inputs.add("A268981");
         inputs.add("A269123");
         inputs.add("A604957");
