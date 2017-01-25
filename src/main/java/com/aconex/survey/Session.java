@@ -39,4 +39,12 @@ public class Session {
 
         return "Session starting from " + sdf.format(startTime) + " ending at " + sdf.format(endTime);
     }
+
+    public Date endTime() {
+        return endTime;
+    }
+
+    public Date startTime() {
+        return startTime;
+    }
 }
