@@ -1,7 +1,9 @@
 package com.aconex.survey;
 
+import com.aconex.survey.reports.VehicleCountReport;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,9 @@ public class VehicleCountReportTest {
         int interval = 720;
         List<Session> sessions = Session.createSessions(interval);
         VehicleCountReport report = new VehicleCountReport(interval);
+        List<VehicleCountReport.VehicleCountReportModel> reportModels = report.generate(entries);
+        assertEquals(10, reportModels.size());
+
 
     }
 }
