@@ -11,32 +11,46 @@ import java.util.List;
 /**
  * Created by sbhowmick on 1/25/17.
  */
-public class VehicleCountReportService extends AbstractSensorReportService<List<VehicleCountReportService.VehicleCountReportItem>> {
+public class VehicleCountReportService extends AbstractSensorReportService {
 
-    private int interval;
+    private final int interval;
 
-    public VehicleCountReportService(int interval) {
+    private final int noOfDays;
+
+    public VehicleCountReportService(int interval, int noOfDays) {
         this.interval = interval;
+        this.noOfDays = noOfDays;
     }
 
 
     @Override
-    public List<VehicleCountReportItem> generate(List<VehicleEntry> vehicleEntries) {
+    public String generate(List<VehicleEntry> vehicleEntries) {
         List<Session> sessions = Session.createSessions(this.interval);
-        List<VehicleCountReportItem> reportItems = new ArrayList<>();
+        int totalCount = 0;
+        int peakCount = 0;
+        Session peakSession = null;
+        StringBuilder sb = new StringBuilder();
+
         if(sessions.isEmpty()){
-            return Collections.emptyList();
+            return "";
         }
         for(Session session: sessions) {
             List<VehicleEntry> entriesForSession = filterEntriesForSession(vehicleEntries, session);
-            for(int day = 0; day < 5; day++){
+            for(int day = 0; day < this.noOfDays; day++){
                 long southBoundCount = countEntriesForDirection(entriesForSession, day, Direction.SOUTH);
                 long northBoundCount = countEntriesForDirection(entriesForSession, day, Direction.NORTH);
-                VehicleCountReportItem reportModel = new VehicleCountReportItem(session, southBoundCount, northBoundCount, interval);
-                reportItems.add(reportModel);
+                totalCount += southBoundCount + northBoundCount;
+                sb.append("| Day ").append(day).append(" Count South = ").append(southBoundCount).append(" Count North = ")
+                        .append(northBoundCount);
+            }
+            sb.append('\n');
+            if(totalCount > peakCount){
+                peakCount = totalCount;
+                peakSession = session;
             }
         }
-        return reportItems;
+        sb.append('\n').append(peakSession).append(" is peak session with vehicle count = ").append(totalCount);
+        return sb.toString();
     }
 
     private long countEntriesForDirection(List<VehicleEntry> sessionEntries, int day, Direction direction) {
@@ -46,23 +60,5 @@ public class VehicleCountReportService extends AbstractSensorReportService<List<
 
 
 
-    public class VehicleCountReportItem {
-        public final Session session;
-
-        public final long southCount;
-
-        public final long northCount;
-
-        public final int interval;
-
-
-
-        public VehicleCountReportItem(Session session, long southCount, long northCount, int interval) {
-            this.session = session;
-            this.southCount = southCount;
-            this.northCount = northCount;
-            this.interval = interval;
-        }
-    }
 
 }

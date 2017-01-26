@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Created by sbhowmick on 1/25/17.
  */
-public abstract class AbstractSensorReportService<T> implements SensorReportService<T> {
+public abstract class AbstractSensorReportService<T> implements SensorReportService {
     protected List<VehicleEntry> filterEntriesForSession(List<VehicleEntry> entries, Session session){
         return entries.stream()
                 .filter(vehicleEntry ->

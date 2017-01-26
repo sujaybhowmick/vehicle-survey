@@ -8,9 +8,9 @@ import java.util.List;
  * Created by sbhowmick on 1/25/17.
  */
 
-public interface SensorReportService<T> {
+public interface SensorReportService {
 
-    static final double AVG_SPEED = 16.66; // in m/s
+    double AVG_SPEED = 16.66; // in m/s
 
-    T generate(List<VehicleEntry> vehicleEntries);
+    String generate(List<VehicleEntry> vehicleEntries);
 }

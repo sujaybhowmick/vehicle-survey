@@ -66,4 +66,13 @@ public class VehicleEntry {
     public void setDay(int day) {
         this.day = day;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("day = ").append(day).append("|").append("frontAxleTime = ").append(frontAxleTime).append("|")
+                .append("backAxleTime = ").append(backAxleTime).append("|").append("direction = ").append(direction);
+        return sb.toString();
+    }
 }

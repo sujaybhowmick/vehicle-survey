@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by sbhowmick on 1/25/17.
  */
-public class AverageDistanceReportService extends AbstractSensorReportService<List<AverageDistanceReportService.AverageDistanceReportItem>> {
+public class AverageDistanceReportService extends AbstractSensorReportService {
 
 
     private final int interval;
@@ -22,11 +22,12 @@ public class AverageDistanceReportService extends AbstractSensorReportService<Li
     }
 
     @Override
-    public List<AverageDistanceReportItem> generate(List<VehicleEntry> vehicleEntries) {
+    public String generate(List<VehicleEntry> vehicleEntries) {
         List<Session> sessions = Session.createSessions(interval);
-        List<AverageDistanceReportItem> reportItems = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
         if(sessions.isEmpty()) {
-            return Collections.emptyList();
+            return "";
         }
 
         for(Session session: sessions){
@@ -35,10 +36,10 @@ public class AverageDistanceReportService extends AbstractSensorReportService<Li
             List<VehicleEntry> northEntries = filterEntriesForDirection(entriesForSession, Direction.NORTH);
             double distanceInSouth = getAverageDistance(southEntries);
             double distanceInNorth = getAverageDistance(northEntries);
-            reportItems.add(new AverageDistanceReportItem(session, distanceInSouth, distanceInNorth, interval));
+            sb.append(session).append("| Average distance between cars in south direction = ").append(distanceInSouth)
+                    .append(" meters, in north direction = ").append(distanceInNorth).append(" meters").append('\n');
         }
-
-        return reportItems;
+        return sb.toString();
     }
 
     private double getAverageDistance(List<VehicleEntry> entriesInTheSession) {
@@ -48,23 +49,5 @@ public class AverageDistanceReportService extends AbstractSensorReportService<Li
         long timeOfFirstVehicle = entriesInTheSession.get(0).getEntryTime().getTime();
         double averageTimeGapBetweenVehicles = ((double) timeOfLastVehicle - (double) timeOfFirstVehicle) / (double)entriesInTheSession.size();
         return averageTimeGapBetweenVehicles * SensorReportService.AVG_SPEED/ TimeUtils.MILLISECONDS_IN_A_SECOND;
-    }
-
-    public class AverageDistanceReportItem {
-
-        public final Session session;
-
-        public final double averageDistanceSouth;
-
-        public final double averageDistanceNorth;
-
-        public final int interval;
-
-        public AverageDistanceReportItem(Session session, double averageDistanceSouth, double averageDistanceNorth, int interval) {
-            this.session = session;
-            this.averageDistanceSouth = averageDistanceSouth;
-            this.averageDistanceNorth = averageDistanceNorth;
-            this.interval = interval;
-        }
     }
 }
