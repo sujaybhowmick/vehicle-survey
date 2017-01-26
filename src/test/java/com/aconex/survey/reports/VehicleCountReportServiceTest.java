@@ -17,9 +17,9 @@ public class VehicleCountReportServiceTest extends BaseReportServiceTest {
         String report = vehicleCountReportService.generate(entries);
         assertNotNull(report);
         StringBuilder expected = new StringBuilder();
-        expected.append("| Day 0 Count South = 2 North = 1| Day 1 Count South = 0 North = 0| Day 2 Count South = 0 North = 0| Day 3 Count South = 0 North = 0| Day 4 Count South = 0 North = 0")
+        expected.append("| Day 0 Count South = 2 Count North = 1| Day 1 Count South = 0 Count North = 0| Day 2 Count South = 0 Count North = 0| Day 3 Count South = 0 Count North = 0| Day 4 Count South = 0 Count North = 0")
                 .append('\n')
-                .append("| Day 0 Count South = 0 North = 0| Day 1 Count South = 0 North = 0| Day 2 Count South = 0 North = 0| Day 3 Count South = 0 North = 0| Day 4 Count South = 0 North = 0")
+                .append("| Day 0 Count South = 0 Count North = 0| Day 1 Count South = 0 Count North = 0| Day 2 Count South = 0 Count North = 0| Day 3 Count South = 0 Count North = 0| Day 4 Count South = 0 Count North = 0")
                 .append('\n').append('\n')
                 .append("Session from 00:00:00 to 12:00:00 is peak session with vehicle count = 3");
 
