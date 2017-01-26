@@ -37,7 +37,7 @@ public class Session {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
         sdf.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
 
-        return "Session starting from " + sdf.format(startTime) + " ending at " + sdf.format(endTime);
+        return "Session from " + sdf.format(startTime) + " to " + sdf.format(endTime);
     }
 
     public Date endTime() {
