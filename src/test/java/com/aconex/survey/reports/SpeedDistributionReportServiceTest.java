@@ -17,7 +17,10 @@ public class SpeedDistributionReportServiceTest extends BaseReportServiceTest {
         int interval = 720;
         SpeedDistributionReportService reportService = new SpeedDistributionReportService(interval);
         String report = reportService.generate(entries);
-        assertNotNull(report);
+        StringBuilder expected = new StringBuilder();
+        expected.append("Session from 00:00:00 to 12:00:00| Average speed = 59.84521677317741").append('\n');
+        expected.append("Session from 12:00:00 to 00:00:00| Average speed = 0.0").append('\n');
+        assertEquals(expected.toString(), report.toString());
 
     }
 
