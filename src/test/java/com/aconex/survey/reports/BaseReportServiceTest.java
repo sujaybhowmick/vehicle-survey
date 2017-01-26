@@ -1,5 +1,6 @@
 package com.aconex.survey.reports;
 
+import com.aconex.survey.Direction;
 import com.aconex.survey.SensorDataParser;
 import com.aconex.survey.VehicleEntry;
 import org.junit.Before;
@@ -16,19 +17,10 @@ public class BaseReportServiceTest {
 
     @Before
     public void setUp(){
-        List<String> inputs = new ArrayList<>();
-        inputs.add("A268981");
-        inputs.add("A269123");
-        inputs.add("A604957");
-        inputs.add("B604960");
-        inputs.add("A605128");
-        inputs.add("B605132");
-        inputs.add("A1089807");
-        inputs.add("B1089810");
-        inputs.add("A1089948");
-        inputs.add("B1089951");
-
-        entries = new SensorDataParser().parse(inputs);
+        entries = new ArrayList<>();
+        entries.add(new VehicleEntry(0, 268981, 269123, Direction.NORTH));
+        entries.add(new VehicleEntry(0, 604958, 605130, Direction.SOUTH));
+        entries.add(new VehicleEntry(0, 1089808, 1089949, Direction.SOUTH));
 
     }
 }

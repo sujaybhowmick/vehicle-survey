@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,33 +17,22 @@ public class SensorDataParserTest {
 
     @Before
     public void setUp(){
-        this.sensorInputs = new ArrayList<>();
-        this.sensorInputs.add("A268981");
-        this.sensorInputs.add("A269123");
-        this.sensorInputs.add("A604957");
-        this.sensorInputs.add("B604960");
-        this.sensorInputs.add("A605128");
-        this.sensorInputs.add("B605132");
-        this.sensorInputs.add("A1089807");
-        this.sensorInputs.add("B1089810");
-        this.sensorInputs.add("A1089948");
-        this.sensorInputs.add("B1089951");
-
+        this.sensorInputs = new ArrayList<>(Arrays.asList("A268981", "A269123", "A604957", "B604960",
+                "A605128", "B605132", "A1089807", "B1089810", "A1089948", "B1089951"));
     }
 
     @Test
-    public void testValidInput(){
-        SensorDataParser parser = new SensorDataParser();
-        List<VehicleEntry> entries = parser.parse(this.sensorInputs);
-        int actual = entries.size();
-        int expected = 3;
-        assertEquals(expected, actual);
-
-        entries = parser.parse(this.sensorInputs.subList(2, sensorInputs.size()));
-        assertEquals(2, entries.size());
-
-        entries = parser.parse(this.sensorInputs.subList(6, sensorInputs.size()));
-        assertEquals(1, entries.size());
-
+    public void testCountVehicleEntryInNorthDirection(){
+        List<VehicleEntry> entries = new SensorDataParser().parse(this.sensorInputs);
+        long actualCount = entries.stream().filter(vehicleEntry -> vehicleEntry.getDirection() == Direction.NORTH).count();
+        assertEquals(1, actualCount);
     }
+
+    @Test
+    public void testCountVehicleEntryInSouthDirection(){
+        List<VehicleEntry> entries = new SensorDataParser().parse(this.sensorInputs);
+        long actualCount = entries.stream().filter(vehicleEntry -> vehicleEntry.getDirection() == Direction.SOUTH).count();
+        assertEquals(2, actualCount);
+    }
+
 }
